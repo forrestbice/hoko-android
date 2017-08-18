@@ -203,7 +203,7 @@ public class Deeplinking {
      * @param smartlinkResolveListener A link resolved listener for lifecycle purposes, called
      *                                 before opening the deeplink.
      */
-    public void openSmartlink(String smartlink, final SmartlinkResolveListener smartlinkResolveListener) {
+    public void openSmartlink(final String smartlink, final SmartlinkResolveListener smartlinkResolveListener) {
         mResolver.resolveSmartlink(smartlink, new SmartlinkResolveListener() {
             @Override
             public void onLinkResolved(String deeplink, JSONObject metadata) {
@@ -215,8 +215,13 @@ public class Deeplinking {
 
             @Override
             public void onError(Exception e) {
-                if (smartlinkResolveListener != null) {
-                    smartlinkResolveListener.onError(e);
+                // If this isn't a smart link or Hoko Links gets fails or Hoko Links
+                // has been shut down; attempt to resolve the link locally
+                if (!openURL(smartlink)) {
+                    // The link still couldn't be resolved
+                    if (smartlinkResolveListener != null) {
+                        smartlinkResolveListener.onError(e);
+                    }
                 }
             }
         });
