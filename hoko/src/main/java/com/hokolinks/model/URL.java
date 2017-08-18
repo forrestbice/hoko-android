@@ -105,7 +105,13 @@ public class URL {
      */
     public HashMap<String, String> matchesWithRoute(Route route) {
         List<String> pathComponents = new ArrayList<>();
-        pathComponents.add(mUri.getAuthority());
+        // Resolved smart links don't include domain information
+        // but traditional http links do. In order for the size
+        // of pathComponents and routeComponents to match we
+        // selectively consider the Authority part of the path
+        if (!mUri.getScheme().startsWith("http")) {
+            pathComponents.add(mUri.getAuthority());
+        }
         pathComponents.addAll(mUri.getPathSegments());
         List<String> routeComponents = route.getComponents();
 
