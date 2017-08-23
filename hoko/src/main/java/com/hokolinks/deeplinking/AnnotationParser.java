@@ -290,7 +290,9 @@ public class AnnotationParser {
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment).commit();
+                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
+                        .addToBackStack(fragment.getTag())
+                        .commit();
                 return true;
             } else if (android.app.Fragment.class.isAssignableFrom(fragmentClass)) {
                 android.app.Fragment fragment = (android.app.Fragment) fragmentClass
@@ -298,7 +300,9 @@ public class AnnotationParser {
                 fragment.setArguments(bundle);
                 android.app.FragmentManager fragmentManager = activity.getFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment).commit();
+                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
+                        .addToBackStack(fragment.getTag())
+                        .commit();
                 return true;
             }
         } catch (Exception e) {
