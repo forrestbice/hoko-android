@@ -291,8 +291,7 @@ public class AnnotationParser {
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
-                        .addToBackStack(fragmentClass.getCanonicalName()
-                                + String.valueOf(fragmentManager.getBackStackEntryCount()))
+                        .addToBackStack(fragmentClass.getCanonicalName())
                         .commit();
                 fragmentManager.executePendingTransactions();
                 return true;
@@ -303,8 +302,7 @@ public class AnnotationParser {
                 android.app.FragmentManager fragmentManager = activity.getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
-                        .addToBackStack(fragmentClass.getCanonicalName()
-                                + String.valueOf(fragmentManager.getBackStackEntryCount()))
+                        .addToBackStack(fragmentClass.getCanonicalName())
                         .commit();
                 fragmentManager.executePendingTransactions();
                 return true;
