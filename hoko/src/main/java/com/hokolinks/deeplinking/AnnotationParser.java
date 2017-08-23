@@ -289,9 +289,11 @@ public class AnnotationParser {
                 Fragment fragment = (Fragment) fragmentClass.getDeclaredConstructor().newInstance();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                String tag = fragmentClass.getCanonicalName() +
+                        fragmentManager.getBackStackEntryCount();
                 fragmentManager.beginTransaction()
-                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
-                        .addToBackStack(fragmentClass.getCanonicalName())
+                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment, tag)
+                        .addToBackStack(tag)
                         .commit();
                 fragmentManager.executePendingTransactions();
                 return true;
@@ -300,9 +302,11 @@ public class AnnotationParser {
                         .getDeclaredConstructor().newInstance();
                 fragment.setArguments(bundle);
                 android.app.FragmentManager fragmentManager = activity.getFragmentManager();
+                String tag = fragmentClass.getCanonicalName() +
+                        fragmentManager.getBackStackEntryCount();
                 fragmentManager.beginTransaction()
-                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment)
-                        .addToBackStack(fragmentClass.getCanonicalName())
+                        .replace(deeplinkFragmentActivityAnnotation.id(), fragment, tag)
+                        .addToBackStack(tag)
                         .commit();
                 fragmentManager.executePendingTransactions();
                 return true;
