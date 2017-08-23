@@ -294,6 +294,7 @@ public class AnnotationParser {
                         .addToBackStack(fragmentClass.getCanonicalName()
                                 + String.valueOf(fragmentManager.getBackStackEntryCount()))
                         .commit();
+                fragmentManager.executePendingTransactions();
                 return true;
             } else if (android.app.Fragment.class.isAssignableFrom(fragmentClass)) {
                 android.app.Fragment fragment = (android.app.Fragment) fragmentClass
@@ -305,6 +306,7 @@ public class AnnotationParser {
                         .addToBackStack(fragmentClass.getCanonicalName()
                                 + String.valueOf(fragmentManager.getBackStackEntryCount()))
                         .commit();
+                fragmentManager.executePendingTransactions();
                 return true;
             }
         } catch (Exception e) {
