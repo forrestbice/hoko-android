@@ -295,7 +295,6 @@ public class AnnotationParser {
                         .replace(deeplinkFragmentActivityAnnotation.id(), fragment, tag)
                         .addToBackStack(tag)
                         .commit();
-                fragmentManager.executePendingTransactions();
                 return true;
             } else if (android.app.Fragment.class.isAssignableFrom(fragmentClass)) {
                 android.app.Fragment fragment = (android.app.Fragment) fragmentClass
@@ -308,7 +307,6 @@ public class AnnotationParser {
                         .replace(deeplinkFragmentActivityAnnotation.id(), fragment, tag)
                         .addToBackStack(tag)
                         .commit();
-                fragmentManager.executePendingTransactions();
                 return true;
             }
         } catch (Exception e) {
